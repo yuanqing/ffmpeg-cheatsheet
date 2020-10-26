@@ -1,6 +1,6 @@
 # FFmpeg Cheatsheet
 
-> A cheatsheet for common video processing operations in FFmpeg
+> A cheatsheet for common video processing operations in [FFmpeg](https://ffmpeg.org)
 
 ## Operations
 
