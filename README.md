@@ -10,10 +10,10 @@
 
 ```sh
 # Crop to width 360, height 640
-$ ffmpeg -i input.mov -filter:v "crop=360:640:0:0" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'crop=360:640:0:0' -codec:a copy output.mov
 
 # Crop to width 360, height 640, starting from coordinates (10, 20)
-$ ffmpeg -i input.mov -filter:v "crop=360:640:10:20" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'crop=360:640:10:20' -codec:a copy output.mov
 ```
 
 ### Format
@@ -37,7 +37,7 @@ $ ffmpeg -i input.mov -codec:v copy -codec:a copy output.mp4
 
 ```sh
 # Change the frame rate to 12
-$ ffmpeg -i input.mov -filter:v "fps=fps=12" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'fps=fps=12' -codec:a copy output.mov
 ```
 
 ### Strip audio
@@ -55,13 +55,13 @@ $ ffmpeg -i input.mov -codec:v copy -an output.mov
 
 ```sh
 # Resize to width 360, height 640
-$ ffmpeg -i input.mov -filter:v "scale=360:640" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'scale=360:640' -codec:a copy output.mov
 
 # Resize to width 360, maintaining the aspect ratio
-$ ffmpeg -i input.mov -filter:v "scale=360:-1" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'scale=360:-1' -codec:a copy output.mov
 
 # Resize to height 640, maintaining the aspect ratio
-$ ffmpeg -i input.mov -filter:v "scale=-1:640" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'scale=-1:640' -codec:a copy output.mov
 ```
 
 - Set either `width` or `height` to `-1` to maintain the aspect ratio.
@@ -72,7 +72,7 @@ $ ffmpeg -i input.mov -filter:v "scale=-1:640" -codec:a copy output.mov
 
 ```sh
 # Reverse
-$ ffmpeg -i input.mov -filter:v "reverse" -filter:a "areverse" output.mov
+$ ffmpeg -i input.mov -filter:v 'reverse' -filter:a 'areverse' output.mov
 ```
 
 ### Rotate
@@ -81,13 +81,13 @@ $ ffmpeg -i input.mov -filter:v "reverse" -filter:a "areverse" output.mov
 
 ```sh
 # Rotate 90 degrees clockwise
-$ ffmpeg -i input.mov -filter:v "transpose=1" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'transpose=1' -codec:a copy output.mov
 
 # Rotate 90 degrees counter-clockwise
-$ ffmpeg -i input.mov -filter:v "transpose=2" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'transpose=2' -codec:a copy output.mov
 
 # Rotate 180 degrees
-$ ffmpeg -i input.mov -filter:v "transpose=1,transpose=1" -codec:a copy output.mov
+$ ffmpeg -i input.mov -filter:v 'transpose=1,transpose=1' -codec:a copy output.mov
 ```
 
 ### Speed
@@ -96,16 +96,16 @@ $ ffmpeg -i input.mov -filter:v "transpose=1,transpose=1" -codec:a copy output.m
 
 ```sh
 # Quarter the speed
-$ ffmpeg -i input.mov -filter:v "setpts=4*PTS" -filter:a "atempo=0.5,atempo=0.5" output.mov
+$ ffmpeg -i input.mov -filter:v 'setpts=4*PTS' -filter:a 'atempo=0.5,atempo=0.5' output.mov
 
 # Halve the speed
-$ ffmpeg -i input.mov -filter:v "setpts=2*PTS" -filter:a "atempo=0.5" output.mov
+$ ffmpeg -i input.mov -filter:v 'setpts=2*PTS' -filter:a 'atempo=0.5' output.mov
 
 # Double the speed
-$ ffmpeg -i input.mov -filter:v "setpts=0.5*PTS" -filter:a "atempo=2" output.mov
+$ ffmpeg -i input.mov -filter:v 'setpts=0.5*PTS' -filter:a 'atempo=2' output.mov
 
 # Quadruple the speed
-$ ffmpeg -i input.mov -filter:v "setpts=0.25*PTS" -filter:a "atempo=2,atempo=2" output.mov
+$ ffmpeg -i input.mov -filter:v 'setpts=0.25*PTS' -filter:a 'atempo=2,atempo=2' output.mov
 ```
 
 - Use the formula `1 ÷ speed` to compute the value of `setpts`.
@@ -136,10 +136,10 @@ $ ffmpeg -ss 0:05 -to 0:10 -i input.mov -codec:v copy -codec:a copy output.mov
 
 ```sh
 # Halve the volume
-$ ffmpeg -i input.mov -codec:v copy -filter:a "volume=0.5" output.mov
+$ ffmpeg -i input.mov -codec:v copy -filter:a 'volume=0.5' output.mov
 
 # Double the volume
-$ ffmpeg -i input.mov -codec:v copy -filter:a "volume=2" output.mov
+$ ffmpeg -i input.mov -codec:v copy -filter:a 'volume=2' output.mov
 ```
 
 ## Relevant CLI flags
