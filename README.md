@@ -148,6 +148,7 @@ $ ffmpeg -i input.mov -codec:v copy -filter:a 'volume=2' output.mov
 
 ```
 ffmpeg
+  -an
   -ss <timestamp>
   -to <timestamp>
   -i <input>
