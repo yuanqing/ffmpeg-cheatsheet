@@ -138,6 +138,9 @@ $ ffmpeg -i input.mov -filter:v 'setpts=0.25*PTS' -filter:a 'atempo=2,atempo=2' 
 
 ```sh
 # Write subtitles into video
+$ ffmpeg -i input.mov -filter:v 'subtitles=subtitles.srt' -codec:a copy output.mov
+
+# Write subtitles into video, with custom subtitle styles
 $ ffmpeg -i input.mov -filter:v "subtitles=subtitles.srt:force_style='FontName=Menlo Bold,Fontsize=18'" -codec:a copy output.mov
 ```
 
