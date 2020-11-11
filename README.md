@@ -4,6 +4,22 @@
 
 ## Operations
 
+*Use the `-y` flag to override the output file if it exists.*
+
+### Audio-video sync
+
+> [Reference](https://superuser.com/questions/982342/in-ffmpeg-how-to-delay-only-the-audio-of-a-mp4-video-without-converting-the-au)
+
+```sh
+# Delay audio by 3 seconds
+$ ffmpeg -i input.mov -itsoffset 3 -i input.mov -map 0:v -map 1:a -codec:a copy -codec:v copy output.mov
+
+# Delay video by 3 seconds (ie. advance audio by 3 seconds)
+$ ffmpeg -i input.mov -itsoffset 3 -i input.mov -map 1:v -map 0:a -codec:a copy -codec:v copy output.mov
+```
+
+- The second `-i` flag must come *immediately after* the `-itsoffset` flag.
+
 ### Crop
 
 > [Reference](https://ffmpeg.org/ffmpeg-filters.html#crop)
@@ -45,7 +61,7 @@ $ ffmpeg -i input.mov -filter:v 'fps=fps=12' -codec:a copy output.mov
 > [Reference](https://superuser.com/questions/268985/remove-audio-from-video-file-with-ffmpeg)
 
 ```sh
-# Strip audio
+# Remove audio
 $ ffmpeg -i input.mov -codec:v copy -an output.mov
 ```
 
@@ -116,16 +132,25 @@ $ ffmpeg -i input.mov -filter:v 'setpts=0.25*PTS' -filter:a 'atempo=2,atempo=2' 
   - Quarter the speed: `atempo=0.5,atempo=0.5` since `0.5 × 0.5 = 0.25`.
   - Quadruple the speed: `atempo=2,atempo=2` since `2 × 2 = 4`.
 
+### Subtitles
+
+> [Reference](https://stackoverflow.com/questions/57869367/ffmpeg-subtitles-alignment-and-position)
+
+```sh
+# Write subtitles into video
+$ ffmpeg -i input.mov -filter:v "subtitles=subtitles.srt:force_style='FontName=Menlo Bold,Fontsize=18'" -codec:a copy output.mov
+```
+
 ### Trim
 
 > [Reference](https://trac.ffmpeg.org/wiki/Seeking#Cuttingsmallsections)
 
 ```sh
-# Trim from time 0:05 to the end of the input file
-$ ffmpeg -ss 0:05 -i input.mov -codec:v copy -codec:a copy output.mov
-
-# Trim from time 0:05 to 0:10
+# Trim from 0:05 to 0:10
 $ ffmpeg -ss 0:05 -to 0:10 -i input.mov -codec:v copy -codec:a copy output.mov
+
+# Trim from 0:05 to the end of the video
+$ ffmpeg -ss 0:05 -i input.mov -codec:v copy -codec:a copy output.mov
 ```
 
 - The `-ss` and `-to` flags must come *before* the `-i` flag.
@@ -151,7 +176,9 @@ ffmpeg
   -an
   -ss <timestamp>
   -to <timestamp>
+  -itsoffset <offset>
   -i <input>
+  -map <stream>
   -codec:a <codec>
   -codec:v <codec>
   -filter:a <filtergraph>
